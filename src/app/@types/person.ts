@@ -4,5 +4,5 @@ export type PersonType = {
   id: String;
   name: String;
   email: String;
-  Mesas: DeskType[];
+  Mesas?: DeskType[];
 };
