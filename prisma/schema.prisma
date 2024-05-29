@@ -60,7 +60,7 @@ model Mesas {
   mesa         Int
   atendente_id String?
   Chamados     Chamados[]
-  Atendentes   Atendentes? @relation(fields: [atendente_id], references: [id])
+  Atendente   Atendentes? @relation(fields: [atendente_id], references: [id])
 }
 
 model Atendentes {

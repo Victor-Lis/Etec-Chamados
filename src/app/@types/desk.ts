@@ -2,9 +2,9 @@ import { PersonType } from "./person";
 import { TicketType } from "./ticket";
 
 export type DeskType = {
-  id: String;
+  id: string;
   mesa: number;
-  atendente_id?: String;
+  atendente_id?: string | undefined;
   Chamados?: TicketType[];
-  Atendentes?: PersonType
+  Atendente?: PersonType
 };
