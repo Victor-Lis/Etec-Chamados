@@ -1,28 +1,29 @@
 "use client";
 
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { SignUpDesk } from "../../utils/db";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
-import { getPeople } from '../../utils/db'
 import { PersonType } from "@/app/@types/person";
 import Select from "../select";
+import { getPeople, updateDesk } from "../../utils/db";
+import { DeskType } from "@/app/@types/desk";
 
-export default function Form() {
+export default function Form({desk}:{desk: DeskType}) {
   const router = useRouter();
 
   const [pessoas, setPessoas] = useState<PersonType[]>([])
-  const [atendente, setAtendente] = useState<string>('');
-  const [numero, setNumero] = useState<string>('');
+  const [atendente, setAtendente] = useState<string>(desk.Atendente?.name as string);
+  const [numero, setNumero] = useState<number>(desk.mesa as number);
   const [loading, setLoading] = useState<boolean>(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true);
     if (!!atendente && !!numero) {
-      let status = await SignUpDesk({
-        mesa: parseInt(numero),
+      let status = await updateDesk({
+        id: desk.id,
+        mesa: numero,
         atendente_id: atendente,
       });
 
@@ -37,6 +38,7 @@ export default function Form() {
   async function handleGetPeople(){
     let people = await getPeople()
     if(!!people.length){
+      console.log(people)
       setPessoas(people)
     }
   }
@@ -61,7 +63,7 @@ export default function Form() {
             type="number"
             className="border-b-2 border-b-gray-300 px-1 flex-1"
             value={numero}
-            onChange={(e) => setNumero(e.target.value)}
+            onChange={(e) => setNumero(parseInt(e.target.value))}
           />
         </div>
         <button
@@ -69,7 +71,7 @@ export default function Form() {
             "bg-green-500 mt-10 mb-5 mx-auto py-1 px-5 flex items-center justify-center rounded text-white shadow-sm hover:scale-105 hover:shadow-lg duration-300"
           }
         >
-          {!loading ? "Cadastrar" : <Loading/>}
+          {!loading ? "Atualizar" : <Loading/>}
         </button>
       </form>
     </div>
