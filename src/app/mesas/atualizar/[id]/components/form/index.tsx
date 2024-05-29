@@ -38,7 +38,6 @@ export default function Form({desk}:{desk: DeskType}) {
   async function handleGetPeople(){
     let people = await getPeople()
     if(!!people.length){
-      console.log(people)
       setPessoas(people)
     }
   }
@@ -55,7 +54,7 @@ export default function Form({desk}:{desk: DeskType}) {
       >
         <div className="flex items-center justify-around w-full mt-5">
           <h2 className="mr-2">Atendente</h2>
-          <Select people={pessoas} setAtendente={setAtendente}/>
+          <Select people={pessoas} setAtendente={setAtendente} firstOption={pessoas?.find((person) => person.id === atendente)?.name as string}/>
         </div>
         <div className="flex items-center justify-around w-full mt-10">
           <h2 className="mr-2">Número da Mesa</h2>

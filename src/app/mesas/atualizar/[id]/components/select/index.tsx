@@ -5,15 +5,15 @@ import Loading from "@/components/Loading";
 import { Dispatch, SetStateAction, useEffect } from "react";
 
 type SelectProps = {
-  people: PersonType[]
-  setAtendente: Dispatch<SetStateAction<string>>
-  firstOption?: string
-}
+  people: PersonType[];
+  setAtendente: Dispatch<SetStateAction<string>>;
+  firstOption?: string;
+};
 
 export default function Select({
   people,
   setAtendente,
-  firstOption
+  firstOption,
 }: SelectProps) {
   return (
     <>
@@ -26,13 +26,17 @@ export default function Select({
           className="border-b-2 border-b-gray-300 px-1 flex-1"
           onChange={(e) => setAtendente(e.target.value)}
         >
-          <option value={firstOption ? firstOption : ""}>{firstOption ? firstOption : ""}</option>
+          <option value={firstOption ? firstOption : ""}>
+            {firstOption ? firstOption : ""}
+          </option>
           {people?.map((person) => {
-            return (
-              <option key={person.name as string} value={person.id as string}>
-                {person.name}
-              </option>
-            );
+            if (person.name !== firstOption) {
+              return (
+                <option key={person.name as string} value={person.id as string}>
+                  {person.name}
+                </option>
+              );
+            }
           })}
         </select>
       )}
