@@ -35,22 +35,3 @@ export default function Select({
     </>
   );
 }
-
-// {!people.length ? (
-//   <div className="border-b-2 border-b-gray-300 px-1 flex-1 flex justify-center pb-1">
-//     <Loading/>
-//   </div>
-// ): (
-//   <select
-//     className="border-b-2 border-b-gray-300 px-1 flex-1"
-//     onChange={(value) => console.log(value)}
-//   >
-//   {people?.map((person) => {
-//     return (
-//       <option key={person.nome} value={person.nome}>
-//         {person.nome}
-//       </option>
-//     );
-//   })}
-//   </select>
-// )}
