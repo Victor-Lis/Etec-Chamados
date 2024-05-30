@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useContext, useEffect, useState } from "react";
-import { SignUpPerson } from "../../utils/firebase";
+import { FormEvent, useState } from "react";
+import { SignUpPerson } from "../../utils/db"
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
@@ -18,7 +18,7 @@ export default function Form() {
     if (!!nome && !!email) {
       let status = await SignUpPerson({
         email: email,
-        nome: nome,
+        name: nome,
       });
 
       if (status) {
