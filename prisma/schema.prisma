@@ -72,6 +72,7 @@ model Atendentes {
 
 model Chamados {
   id           Int       @id @default(autoincrement())
+  responsavel  String
   time_start   DateTime  @default(now())
   time_end     DateTime?
   preferencial Boolean
