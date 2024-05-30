@@ -1,27 +1,30 @@
-"use client";
-import { useEffect, useState } from "react";
-
-import { TicketType } from "../@types/ticket";
+import { TicketType } from "../../@types/ticket";
 
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";
 
-import { onValue } from "firebase/database";
-import { ticketsRef } from "@/utils/firebaseConfig";
-import { handleSetTicket } from "./utils/handleSetTicket";
 import ButtonNext from "./components/ButtonNext";
 import ButtonAnalytics from "./components/ButtonAnalytics";
+import prisma from "@/lib/prisma";
 
-export default function Tickets() {
-  const [tickets, setTickets] = useState<TicketType[]>([]);
+export default async function Tickets() {
 
-  useEffect(() => {
-    const unsubscribe = onValue(ticketsRef, (snapshot) => {
-      handleSetTicket({ snapshot: snapshot, setValue: setTickets });
-    });
+  async function getTickets(){
+    let data = await prisma.chamados.findMany({
+      include: {
+        Mesa: {
+          include: {
+            Atendente: true,
+          }
+        },
+      }
+    })
+    .then(res => res as TicketType[])
+    .catch(e => console.log(e)) 
+    return !!data ? data : []
+  }
 
-    return () => unsubscribe();
-  }, []);
+  const tickets = await getTickets()
 
   return (
     <main className="flex items-center flex-col justify-start min-h-[calc(100vh-80px)]">

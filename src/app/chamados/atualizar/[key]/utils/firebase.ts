@@ -1,6 +1,6 @@
-import { DeskType } from "@/app/@types/desk";
-import { PersonType } from "@/app/@types/person";
-import { TicketType } from "@/app/@types/ticket";
+import { DeskType } from "@/@types/desk";
+import { PersonType } from "@/@types/person";
+import { TicketType } from "@/@types/ticket";
 
 import { database, peopleRef } from "@/utils/firebaseConfig";
 import { get, push, ref, set } from 'firebase/database'

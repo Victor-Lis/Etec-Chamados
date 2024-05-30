@@ -1,4 +1,4 @@
-import { TicketType } from "@/app/@types/ticket";
+import { TicketType } from "@/@types/ticket";
 
 import { database, ticketsRef } from "@/utils/firebaseConfig";
 import { push, ref, set, get } from 'firebase/database'

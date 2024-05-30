@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
 import { getPeople } from '../../utils/firebase'
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 import Select from "../select";
-import { DeskType } from "@/app/@types/desk";
+import { DeskType } from "@/@types/desk";
 
 export default function Form({desk}:{desk: DeskType}) {
   const router = useRouter();

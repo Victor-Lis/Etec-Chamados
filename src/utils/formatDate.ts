@@ -1,2 +1,2 @@
 import { formatNum } from './formatNum'
-export const formatDate = (date: Date, char?: string) => `${formatNum(date.getDate()+1)}${char? char : "/"}${formatNum(date.getMonth()+1)}${char? char : "/"}${date.getFullYear()}`
+export const formatDate = (date: Date, char?: string) => `${formatNum(date.getDate())}${char? char : "/"}${formatNum(date.getMonth()+1)}${char? char : "/"}${date.getFullYear()}`

@@ -1,28 +1,77 @@
-import { TicketType } from "@/app/@types/ticket";
+import { TicketType } from "@/@types/ticket";
 import ButtonEdit from "@/components/ButtonEdit";
 import ButtonExclude from "@/components/ButtonExclude";
-import { formatDate } from "@/utils/formatDate";
 import { formatNum } from "@/utils/formatNum";
+import { formatDate } from "@/utils/formatDate";
 import ButtonEndTime from "./components/ButtonEndTime";
+import prisma from "@/lib/prisma";
 
 export default function TableRow({ticket}: {ticket: TicketType}) {
+
+  const formatTime = (date: Date) => `${formatNum(date.getHours())}:${formatNum(date.getMinutes())}`
+
+  async function endTime(){
+    "use server"
+    let ticketEndedSuccessfully = await prisma.chamados.update({
+      where: {
+        id: ticket.id,
+      },
+      data: {
+        time_end: new Date(),
+        atendido: true,
+      }
+    })
+    .then(() => true)
+    .catch((e) => {
+      console.log(e)
+      return false
+    })
+
+    return ticketEndedSuccessfully
+  }
+
+  async function handleDelete() {
+    "use server";
+
+    await prisma.chamados.update({
+      where: {
+        id: ticket.id,
+      },
+      data: {
+        Mesa: {
+          disconnect: true,
+        }
+      },
+    });
+
+    let status = await prisma.chamados
+      .delete({
+        where: {
+          id: ticket.id,
+        },
+      })
+      .then(() => true)
+      .catch(() => false);
+    return status;
+  }
+
   return (
     <tr
-      key={ticket.key}
+      key={ticket.id}
       className={`border-b-2 border-b-slate-200 h-16 last:border-b-0 ${ticket.atendido ? "bg-gray-300/75" : "bg-slate-100"}`}
     >
-      <td className={`font-medium text-left pl-1 ${ticket.preferencial && "text-red-600"}`}>{formatNum(ticket.senha)}</td>
-      <td className="font-medium text-left">{ticket.mesa}</td>
-      <td className="font-medium text-left hidden sm:table-cell">{ticket.atendente}</td>
+      <td className={`font-medium text-left pl-1 ${ticket.preferencial && "text-red-600"}`}>{formatNum(ticket.id)}</td>
+      <td className="font-medium text-left">{ticket.Mesa?.mesa}</td>
+      <td className="font-medium text-left hidden sm:table-cell">{ticket.Mesa?.Atendente?.name}</td>
       <td className={`font-medium text-left ${ticket.preferencial && "text-red-600"}`}>{ticket.responsavel}</td>
       <td className={`font-medium py-2 flex flex-col`}>
-        <h2 className="w-full text-bold">{formatDate(new Date(ticket.date))}</h2>
-        <p className="text-gray-600">{ticket.inicioHora} - {ticket?.fimHora ? ticket?.fimHora : "..."}</p>
+        <h2 className="w-full text-bold">{formatDate(new Date(ticket.time_start))}</h2>
+        <p className="text-gray-600">{formatTime(new Date(ticket.time_start))} - {ticket?.time_end ? formatTime(new Date(ticket?.time_end)) : "..."}</p>
       </td>
       <td className="font-medium text-left hidden sm:table-cell">
-        {!ticket.atendido && <ButtonEndTime routeReplace="/chamados" firebaseRef="chamados/" firebaseKey={ticket.key}/>}
-        <ButtonEdit path="/chamados/atualizar/" itemKey={ticket.key}/>
-        <ButtonExclude firebaseRef="chamados/" routeReplace="/chamados" firebaseKey={ticket.key}/>
+        {!ticket.atendido && <ButtonEndTime routeReplace="/chamados" endTime={endTime}/>}
+        {!ticket.atendido && <ButtonEdit path="/chamados/atualizar/" itemId={`${ticket.id}`}/>}
+        <ButtonExclude routeReplace="/chamados" handleDelete={handleDelete}/>
       </td>
     </tr>
   );

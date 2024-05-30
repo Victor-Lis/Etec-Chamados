@@ -1,5 +1,5 @@
 import TableRow from "../TableRow";
-import { TicketType } from "@/app/@types/ticket";
+import { TicketType } from "@/@types/ticket";
 
 export default function Table({tickets}:{tickets: TicketType[]}) {
   return (
@@ -16,7 +16,7 @@ export default function Table({tickets}:{tickets: TicketType[]}) {
       </thead>
       <tbody>
         {tickets?.map((ticket, index) => {
-          return <TableRow key={ticket.key} ticket={ticket} />;
+          return <TableRow key={ticket.id} ticket={ticket} />;
         })}
       </tbody>
     </table>

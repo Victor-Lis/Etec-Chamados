@@ -4,15 +4,19 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
 
-export default function ButtonEndTime({firebaseRef, firebaseKey, routeReplace}:{firebaseRef: string, firebaseKey: string, routeReplace: string}) {
+type ButtonEndTimeProps = {
+    routeReplace: string,
+    endTime: () => Promise<boolean>
+}
+
+export default function ButtonEndTime({routeReplace, endTime}: ButtonEndTimeProps) {
 
  const [loading, setLoading] = useState<boolean>(false)
  const router = useRouter()
 
- async function handleExclude(){
+ async function handleEndTime(){
     setLoading(true)
-    // let status = await excludeFromRef({key: firebaseKey, firebaseRef: firebaseRef})
-    let status = true;
+    let status = await endTime()
     if(status){
         router.replace(routeReplace)
         router.refresh()
@@ -21,7 +25,7 @@ export default function ButtonEndTime({firebaseRef, firebaseKey, routeReplace}:{
  }
 
  return (
-    <button className="mr-3" onClick={handleExclude}>
+    <button className="mr-3" onClick={handleEndTime}>
         {loading ? <Loading size={24}/> : <FiCheck size={24} color="#16a34a" className="hover:scale-110 duration-300 cursor-pointer"/>}
     </button>
  );
