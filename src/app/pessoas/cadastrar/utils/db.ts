@@ -1,5 +1,5 @@
 "use server"
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 
 import prisma from '@/lib/prisma'
 

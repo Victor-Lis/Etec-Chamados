@@ -1,4 +1,4 @@
-import { DeskType } from "@/app/@types/desk";
+import { DeskType } from "@/@types/desk";
 import TableRow from "../TableRow";
 
 export default function Table({desks}:{desks: DeskType[]}) {

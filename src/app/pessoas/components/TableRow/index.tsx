@@ -1,4 +1,4 @@
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 
 import ButtonEdit from "@/components/ButtonEdit";
 import ButtonExclude from "@/components/ButtonExclude";

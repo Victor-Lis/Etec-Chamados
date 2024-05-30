@@ -7,6 +7,7 @@ export type TicketType = {
     preferencial: Boolean
     atendido: Boolean
     Mesa: DeskType
-    mesa_id?: String
+    mesa_id?: string
+    responsavel: string
   }
   

@@ -1,4 +1,4 @@
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 import TableRow from "../TableRow";
 
 export default function Table({people}:{people: PersonType[]}) {

@@ -1,5 +1,5 @@
 "use server";
-import { DeskType } from "@/app/@types/desk";
+import { DeskType } from "@/@types/desk";
 import ButtonEdit from "@/components/ButtonEdit";
 import ButtonExclude from "@/components/ButtonExclude";
 import prisma from "@/lib/prisma";

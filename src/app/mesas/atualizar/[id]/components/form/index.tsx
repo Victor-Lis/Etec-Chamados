@@ -4,10 +4,10 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 import Select from "../select";
 import { getPeople, updateDesk } from "../../utils/db";
-import { DeskType } from "@/app/@types/desk";
+import { DeskType } from "@/@types/desk";
 
 export default function Form({desk}:{desk: DeskType}) {
   const router = useRouter();

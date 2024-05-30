@@ -1,6 +1,6 @@
 "use client";
 
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 import Loading from "@/components/Loading";
 import { Dispatch, SetStateAction, useEffect } from "react";
 

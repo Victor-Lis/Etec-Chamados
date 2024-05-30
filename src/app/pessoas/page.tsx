@@ -1,4 +1,4 @@
-import { PersonType } from "../@types/person";
+import { PersonType } from "../../@types/person";
 
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";

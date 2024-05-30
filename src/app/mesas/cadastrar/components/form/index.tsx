@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
 import { getPeople } from '../../utils/db'
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 import Select from "../select";
 
 export default function Form() {

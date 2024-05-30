@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { DeskType } from "../@types/desk";
+import { DeskType } from "../../@types/desk";
 
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";

@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { UpdatePerson } from "../../utils/db"
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 
 export default function Form({person}:{person: PersonType}) {
   const router = useRouter();

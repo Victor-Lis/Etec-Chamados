@@ -1,7 +1,7 @@
 "use server"
 
-import { DeskType } from "@/app/@types/desk";
-import { PersonType } from "@/app/@types/person";
+import { DeskType } from "@/@types/desk";
+import { PersonType } from "@/@types/person";
 import prisma from "@/lib/prisma";
 
 export async function getDesk({id}:{id: string}){

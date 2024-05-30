@@ -1,6 +1,6 @@
 "use server"
 
-import { PersonType } from "@/app/@types/person";
+import { PersonType } from "@/@types/person";
 import prisma from "@/lib/prisma";
 
 export async function SignUpDesk({mesa, atendente_id}:{mesa: number, atendente_id: string}){

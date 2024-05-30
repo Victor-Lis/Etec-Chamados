@@ -2,7 +2,7 @@ import InternHeader from "@/components/InternHeader";
 import Form from "./components/form";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
-import { DeskType } from "@/app/@types/desk";
+import { DeskType } from "@/@types/desk";
 
 type RouteParams = {
   id: string;
