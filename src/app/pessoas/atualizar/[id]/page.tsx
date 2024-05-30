@@ -1,24 +1,24 @@
 import InternHeader from "@/components/InternHeader";
 import Form from "./components/form";
-import { getPerson } from "./utils/firebase";
+import { getPerson } from "./utils/db";
 import { redirect } from "next/navigation";
 
 type RouteParams = {
-  key: string;
+  id: string;
 };
 
 export default async function Atualizar({ params }: { params: RouteParams }) {
 
-  function hasKey() {
-    if (!params?.key) {
+  function hasId() {
+    if (!params?.id) {
       redirect("/pessoas");
     }
   }
 
-  hasKey()
+  hasId()
 
-  let person = await getPerson({ key: params?.key });
-  if(!person.nome){
+  let person = await getPerson({ id: params?.id as string });
+  if(!person?.name){
     redirect("/pessoas");
   }
 

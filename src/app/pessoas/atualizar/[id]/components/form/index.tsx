@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useContext, useEffect, useState } from "react";
-import { UpdatePerson } from "../../utils/firebase";
+import { FormEvent, useState } from "react";
+import { UpdatePerson } from "../../utils/db"
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import { PersonType } from "@/app/@types/person";
@@ -9,8 +9,8 @@ import { PersonType } from "@/app/@types/person";
 export default function Form({person}:{person: PersonType}) {
   const router = useRouter();
 
-  const [nome, setNome] = useState<string>(person.nome);
-  const [email, setEmail] = useState<string>(person.email);
+  const [nome, setNome] = useState<string>(person.name as string);
+  const [email, setEmail] = useState<string>(person.email as string);
   const [loading, setLoading] = useState<boolean>(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -18,11 +18,11 @@ export default function Form({person}:{person: PersonType}) {
     setLoading(true);
     if (!!nome && !!email) {
       let status = await UpdatePerson({
-        pessoa: {
+        id: person.id,
+        data: {
           email: email,
-          nome: nome,
+          name: nome,
         },
-        key: person.key
       });
 
       if (status) {
