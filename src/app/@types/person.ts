@@ -1,8 +1,8 @@
 import { DeskType } from "./desk";
 
 export type PersonType = {
-  id: String;
-  name: String;
-  email: String;
+  id: string;
+  name: string;
+  email: string;
   Mesas?: DeskType[];
 };

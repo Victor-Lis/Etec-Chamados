@@ -1,31 +1,18 @@
-"use client";
-import { useEffect, useState } from "react";
-
 import { PersonType } from "../@types/person";
 
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";
 
-import { onValue } from "firebase/database";
-import { peopleRef } from "@/utils/firebaseConfig";
-import { handleSetPeople } from "./utils/handleSetPeople";
+import { getPeople } from "../mesas/cadastrar/utils/db";
 
-export default function Pessoas() {
-  const [people, setPeople] = useState<PersonType[]>([]);
-
-  useEffect(() => {
-    const unsubscribe = onValue(peopleRef, (snapshot) => {
-      handleSetPeople({ snapshot: snapshot, setValue: setPeople });
-    });
-
-    return () => unsubscribe();
-  }, []);
+export default async function Pessoas() {
+  const people: PersonType[] = await getPeople()
 
   return (
     <main className="flex items-center flex-col justify-start min-h-[calc(100vh-80px)]">
       <InternHeader
         title="Pessoas Autorizadas"
-        pathToReturn="/navegacao "
+        pathToReturn="/navegacao"
         routerPath="/pessoas/cadastrar"
       />
       <Table people={people} />

@@ -13,7 +13,7 @@ export default function Table({people}:{people: PersonType[]}) {
       </thead>
       <tbody>
         {people?.map((person, index) => {
-          return <TableRow key={person.key} person={person} />;
+          return <TableRow key={person.id as string} person={person} />;
         })}
       </tbody>
     </table>
