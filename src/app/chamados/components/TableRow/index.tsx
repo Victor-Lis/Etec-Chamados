@@ -70,7 +70,7 @@ export default function TableRow({ticket}: {ticket: TicketType}) {
       </td>
       <td className="font-medium text-left hidden sm:table-cell">
         {!ticket.atendido && <ButtonEndTime routeReplace="/chamados" endTime={endTime}/>}
-        {!ticket.atendido && <ButtonEdit path="/chamados/atualizar/" itemId={`${ticket.id}`}/>}
+        {!ticket.atendido && <ButtonEdit path="/chamados/atualizar/" itemId={`${ticket.id}`}/>} 
         <ButtonExclude routeReplace="/chamados" handleDelete={handleDelete}/>
       </td>
     </tr>

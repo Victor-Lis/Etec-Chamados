@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { SignUpTicket } from "../../utils/firebase";
+import { SignUpTicket } from "../../utils/db";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
@@ -19,6 +19,7 @@ export default function Form() {
       let status = await SignUpTicket({
         responsavel, 
         preferencial,
+        atendido: false,
       });
 
       if (status) {
