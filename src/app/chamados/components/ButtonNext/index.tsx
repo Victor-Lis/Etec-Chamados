@@ -1,28 +1,15 @@
-"use client"
-import Loading from "@/components/Loading";
-import { useState } from "react";
+"use client";
+import { FiChevronsRight } from "react-icons/fi";
+import Link from "next/link";
 
 export default function ButtonNext() {
-
- const [loading, setLoading] = useState<boolean>(false)
-
- async function handleNext(){
-    setLoading(true)
-    let status = await handleNext()
-    setLoading(false)
- }
-
- return (
-    <>
-        {loading ? 
-          <Loading size={24}/> 
-        : 
-          <button 
-            onClick={handleNext} 
-            className="hover:opacity-75 duration-300 cursor-pointer bg-blue-600 px-2 rounded-sm text-white">
-              Próximo
-          </button>
-        }
-    </>
- );
+  return (
+    <Link
+      href="/chamados/proximo"
+      className="hover:opacity-75 duration-300 cursor-pointer bg-blue-600 pl-2 pr-1 rounded-sm text-white flex justify-center items-center"
+    > 
+      <p>Próximo</p>      
+      <FiChevronsRight size={20} color="#fff"/>
+    </Link>
+  );
 }

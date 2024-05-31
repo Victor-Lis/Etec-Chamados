@@ -23,8 +23,8 @@ export default function Form() {
       });
 
       if (status) {
-        router.refresh()
         router.back();
+        router.refresh();
       }
     }
     setLoading(false);

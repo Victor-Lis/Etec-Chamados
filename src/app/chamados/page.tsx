@@ -11,6 +11,9 @@ export default async function Tickets() {
 
   async function getTickets(){
     let data = await prisma.chamados.findMany({
+      orderBy: {
+        id: "asc"
+      },
       include: {
         Mesa: {
           include: {

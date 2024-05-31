@@ -33,7 +33,7 @@ export default function TableRow({ticket}: {ticket: TicketType}) {
         <p className="text-gray-600">{formatTime(new Date(ticket.time_start))} - {ticket?.time_end ? formatTime(new Date(ticket?.time_end)) : "..."}</p>
       </td>
       <td className="font-medium text-left hidden sm:table-cell">
-        {!ticket.atendido && <ButtonEndTime routeReplace="/chamados" id={ticket.id}/>}
+        {!ticket.atendido && !!ticket.mesa_id && <ButtonEndTime routeReplace="/chamados" id={ticket.id}/>}
         {!!ticket.atendido && <ButtonRestartEndTime routeReplace="/chamados" id={ticket.id}/>}
         {!ticket.atendido && <ButtonEdit path="/chamados/atualizar/" itemId={`${ticket.id}`}/>} 
         <ButtonExclude routeReplace="/chamados" handleDelete={handleDelete}/>

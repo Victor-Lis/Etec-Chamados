@@ -25,8 +25,8 @@ export default function Form({ticket}:{ticket: TicketType}) {
       });
 
       if (status) {
-        router.refresh();
         router.back();
+        router.refresh();
       }
     }
     setLoading(false);
