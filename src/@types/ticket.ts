@@ -4,8 +4,8 @@ export type TicketType = {
     id: number;
     time_start: Date;
     time_end?: Date;
-    preferencial: Boolean
-    atendido: Boolean
+    preferencial: boolean
+    atendido: boolean
     Mesa: DeskType
     mesa_id?: string
     responsavel: string

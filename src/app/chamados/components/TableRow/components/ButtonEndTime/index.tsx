@@ -3,20 +3,21 @@ import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
+import { endTime } from "../../utils/db";
 
 type ButtonEndTimeProps = {
     routeReplace: string,
-    endTime: () => Promise<boolean>
+    id: number,
 }
 
-export default function ButtonEndTime({routeReplace, endTime}: ButtonEndTimeProps) {
+export default function ButtonEndTime({routeReplace, id}: ButtonEndTimeProps) {
 
  const [loading, setLoading] = useState<boolean>(false)
  const router = useRouter()
 
  async function handleEndTime(){
     setLoading(true)
-    let status = await endTime()
+    let status = await endTime({id})
     if(status){
         router.replace(routeReplace)
         router.refresh()

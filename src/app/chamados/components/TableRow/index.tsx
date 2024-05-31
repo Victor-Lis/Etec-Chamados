@@ -1,58 +1,22 @@
 import { TicketType } from "@/@types/ticket";
+
+import ButtonEndTime from "./components/ButtonEndTime";
+import ButtonRestartEndTime from "./components/ButtonRestartEndTime";
 import ButtonEdit from "@/components/ButtonEdit";
 import ButtonExclude from "@/components/ButtonExclude";
+
 import { formatNum } from "@/utils/formatNum";
 import { formatDate } from "@/utils/formatDate";
-import ButtonEndTime from "./components/ButtonEndTime";
-import prisma from "@/lib/prisma";
+import { DeleteTicket } from "./utils/db";
 
 export default function TableRow({ticket}: {ticket: TicketType}) {
 
   const formatTime = (date: Date) => `${formatNum(date.getHours())}:${formatNum(date.getMinutes())}`
 
-  async function endTime(){
+  async function handleDelete(){
     "use server"
-    let ticketEndedSuccessfully = await prisma.chamados.update({
-      where: {
-        id: ticket.id,
-      },
-      data: {
-        time_end: new Date(),
-        atendido: true,
-      }
-    })
-    .then(() => true)
-    .catch((e) => {
-      console.log(e)
-      return false
-    })
-
-    return ticketEndedSuccessfully
-  }
-
-  async function handleDelete() {
-    "use server";
-
-    await prisma.chamados.update({
-      where: {
-        id: ticket.id,
-      },
-      data: {
-        Mesa: {
-          disconnect: true,
-        }
-      },
-    });
-
-    let status = await prisma.chamados
-      .delete({
-        where: {
-          id: ticket.id,
-        },
-      })
-      .then(() => true)
-      .catch(() => false);
-    return status;
+    let status = await DeleteTicket({id: ticket.id})
+    return status
   }
 
   return (
@@ -69,7 +33,8 @@ export default function TableRow({ticket}: {ticket: TicketType}) {
         <p className="text-gray-600">{formatTime(new Date(ticket.time_start))} - {ticket?.time_end ? formatTime(new Date(ticket?.time_end)) : "..."}</p>
       </td>
       <td className="font-medium text-left hidden sm:table-cell">
-        {!ticket.atendido && <ButtonEndTime routeReplace="/chamados" endTime={endTime}/>}
+        {!ticket.atendido && <ButtonEndTime routeReplace="/chamados" id={ticket.id}/>}
+        {!!ticket.atendido && <ButtonRestartEndTime routeReplace="/chamados" id={ticket.id}/>}
         {!ticket.atendido && <ButtonEdit path="/chamados/atualizar/" itemId={`${ticket.id}`}/>} 
         <ButtonExclude routeReplace="/chamados" handleDelete={handleDelete}/>
       </td>
