@@ -12,7 +12,7 @@ export default async function Tickets() {
   async function getTickets(){
     let data = await prisma.chamados.findMany({
       orderBy: {
-        id: "asc"
+        id: "asc",
       },
       include: {
         Mesa: {
@@ -22,7 +22,7 @@ export default async function Tickets() {
         },
       }
     })
-    .then(res => res as TicketType[])
+    .then(res => res.sort((a, b) => Number(b.atendido) - Number(a.atendido)) as TicketType[])
     .catch(e => console.log(e)) 
     return !!data ? data : []
   }
@@ -52,7 +52,7 @@ export default async function Tickets() {
               </div>
             </div>
             <ButtonAnalytics/>
-            <ButtonNext/>
+            {tickets.find((ticket) => !ticket.atendido) && <ButtonNext/>}
           </div>
         }
       />
