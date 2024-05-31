@@ -1,34 +1,34 @@
 import InternHeader from "@/components/InternHeader";
 import Form from "./components/form";
-import { getDesk } from "./utils/firebase";
+import { getTicket } from "./utils/db";
 import { redirect } from "next/navigation";
 
 type RouteParams = {
-  key: string;
+  id: string;
 };
 
 export default async function Atualizar({ params }: { params: RouteParams }) {
 
-  function hasKey() {
-    if (!params?.key) {
-      redirect("/mesas");
+  function hasId() {
+    if (!params?.id) {
+      redirect("/chamados");
     }
   }
 
-  hasKey()
+  hasId()
 
-  let desk = await getDesk({ key: params?.key });
-  if(!desk.atendente){
-    redirect("/pessoas");
+  let ticket = await getTicket({ id: parseInt(params?.id) });
+  if(!ticket?.id){
+    redirect("/chamados");
   }
 
   return (
     <main className="flex items-center flex-col justify-start min-h-[calc(100vh-80px)]">
       <InternHeader
-        title="Atualizar Autorização"
-        pathToReturn="/pessoas"
+        title="Atualizar Chamado"
+        pathToReturn="/chamados"
       />
-      <Form desk={desk}/>
+      <Form ticket={ticket}/>
     </main>
   );
 }
