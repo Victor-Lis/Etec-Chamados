@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { UpdateTicket } from "../../utils/db";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
