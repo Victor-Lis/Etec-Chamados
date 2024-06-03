@@ -3,12 +3,16 @@ import Form from "./components/form";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { DeskType } from "@/@types/desk";
+import { getDesk } from "./utils/db";
+import { isAuthorized } from "@/utils/isAuthorized";
 
 type RouteParams = {
   id: string;
 };
 
 export default async function Atualizar({ params }: { params: RouteParams }) {
+
+  await isAuthorized()
 
   function hasId() {
     if (!params?.id) {
@@ -18,19 +22,7 @@ export default async function Atualizar({ params }: { params: RouteParams }) {
 
   hasId()
 
-  async function getDesk(){
-    let data = await prisma.mesas.findFirst({
-      where: {
-        id: params.id,
-      }
-    })
-    .then(res => res as DeskType)
-    .catch(e => console.log(e)) 
-    return !!data ? data : undefined
-  }
-
-
-  let desk = await getDesk();
+  let desk = await getDesk({id: params?.id as string});
   if(!desk?.id){
     redirect("/pessoas");
   }

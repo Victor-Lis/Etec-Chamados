@@ -2,8 +2,10 @@ import IconBox from "./components/IconBox";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { BiCabinet } from "react-icons/bi";
 import { FiMonitor } from "react-icons/fi";
+import { isAuthorized } from "@/utils/isAuthorized";
 
-export default function Navigation() {
+export default async function Navigation() {
+  await isAuthorized()
   return (
     <main className="flex items-center justify-center min-h-[calc(100svh-(80px))]">
       <div className="flex justify-center items-center mb-14 w-full flex-wrap">

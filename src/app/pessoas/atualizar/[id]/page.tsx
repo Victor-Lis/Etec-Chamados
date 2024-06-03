@@ -2,12 +2,15 @@ import InternHeader from "@/components/InternHeader";
 import Form from "./components/form";
 import { getPerson } from "./utils/db";
 import { redirect } from "next/navigation";
+import { isAuthorized } from "@/utils/isAuthorized";
 
 type RouteParams = {
   id: string;
 };
 
 export default async function Atualizar({ params }: { params: RouteParams }) {
+
+  await isAuthorized()
 
   function hasId() {
     if (!params?.id) {

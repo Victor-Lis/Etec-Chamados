@@ -1,31 +1,15 @@
-import { TicketType } from "../../@types/ticket";
-
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";
 
 import ButtonNext from "./components/ButtonNext";
 import ButtonAnalytics from "./components/ButtonAnalytics";
-import prisma from "@/lib/prisma";
+
+import { isAuthorized } from "@/utils/isAuthorized";
+import { getTickets } from "./utils/db";
 
 export default async function Tickets() {
 
-  async function getTickets(){
-    let data = await prisma.chamados.findMany({
-      orderBy: {
-        id: "asc",
-      },
-      include: {
-        Mesa: {
-          include: {
-            Atendente: true,
-          }
-        },
-      }
-    })
-    .then(res => res.sort((a, b) => Number(b.atendido) - Number(a.atendido)) as TicketType[])
-    .catch(e => console.log(e)) 
-    return !!data ? data : []
-  }
+  await isAuthorized()
 
   const tickets = await getTickets()
 

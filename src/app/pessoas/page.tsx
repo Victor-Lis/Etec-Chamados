@@ -4,8 +4,12 @@ import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";
 
 import { getPeople } from "../mesas/cadastrar/utils/db";
+import { isAuthorized } from "@/utils/isAuthorized";
 
 export default async function Pessoas() {
+
+  await isAuthorized()
+
   const people: PersonType[] = await getPeople()
 
   return (
