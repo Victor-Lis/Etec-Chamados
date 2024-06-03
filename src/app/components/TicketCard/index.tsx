@@ -8,8 +8,8 @@ type TicketCardProps = {
 export default function TicketCard({ ticket, last }: TicketCardProps) {
   return (
     <div
-      className={`w-5/12 min-w-[300px] bg-white shadow-md px-5 py-2 mt-2 rounded border-[0.5px] ${
-        !!last && "border-red-500"
+      className={`w-5/12 min-w-[300px] bg-white shadow-md px-5 py-2 mb-16 rounded border-[0.5px] ${
+        !!last && "border-blue-600"
       }`}
     >
       <div className="flex w-full justify-between items-center mb-3">
