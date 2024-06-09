@@ -1,3 +1,5 @@
+'use client'
+import React, { useState, useEffect } from 'react';
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";
 
@@ -6,12 +8,20 @@ import ButtonAnalytics from "./components/ButtonAnalytics";
 
 import { isAuthorized } from "@/utils/isAuthorized";
 import { getTickets } from "./utils/db";
+import { TicketType } from '@/@types/ticket';
 
-export default async function Tickets() {
+export default function Tickets() {
+  const [tickets, setTickets] = useState<TicketType[]>([]);
 
-  await isAuthorized()
+  useEffect(() => {
+    const fetchData = async () => {
+      await isAuthorized();
+      const fetchedTickets = await getTickets();
+      setTickets(fetchedTickets);
+    };
 
-  const tickets = await getTickets()
+    fetchData();
+  }, []);
 
   return (
     <main className="flex items-center flex-col justify-start min-h-[calc(100vh-80px)]">

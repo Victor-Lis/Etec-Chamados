@@ -14,7 +14,7 @@ export default function TableRow({ticket}: {ticket: TicketType}) {
   const formatTime = (date: Date) => `${formatNum(date.getHours())}:${formatNum(date.getMinutes())}`
 
   async function handleDelete(){
-    "use server"
+    // "use server"
     let status = await DeleteTicket({id: ticket.id})
     return status
   }
@@ -36,7 +36,7 @@ export default function TableRow({ticket}: {ticket: TicketType}) {
         {!ticket.atendido && !!ticket.mesa_id && <ButtonEndTime routeReplace="/chamados" id={ticket.id}/>}
         {!!ticket.atendido && <ButtonRestartEndTime routeReplace="/chamados" id={ticket.id}/>}
         {!ticket.atendido && <ButtonEdit path="/chamados/atualizar/" itemId={`${ticket.id}`}/>} 
-        <ButtonExclude routeReplace="/chamados" handleDelete={handleDelete}/>
+        <ButtonExclude handleDelete={handleDelete}/>
       </td>
     </tr>
   );

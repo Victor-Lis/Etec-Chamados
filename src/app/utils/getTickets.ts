@@ -20,6 +20,5 @@ export async function getTickets(){
         }
     })
     .then(tickets => tickets.filter(ticket => !!ticket.Mesa?.mesa))
-
     return tickets ? tickets[0] as TicketType : undefined
 }

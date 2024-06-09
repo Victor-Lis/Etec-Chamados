@@ -1,7 +1,9 @@
+"use server"
 import { TicketType } from "@/@types/ticket";
 import prisma from "@/lib/prisma";
 
 export async function getTickets() {
+  "user server"
   let data = await prisma.chamados
     .findMany({
       orderBy: {

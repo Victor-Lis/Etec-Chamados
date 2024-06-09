@@ -6,20 +6,19 @@ import { FiTrash2 } from "react-icons/fi";
 
 type ButtonProps = {
     handleDelete: () => Promise<boolean>; 
-    routeReplace: string
 }
 
-export default function ButtonExclude({routeReplace, handleDelete}: ButtonProps) {
 
- const [loading, setLoading] = useState<boolean>(false)
+export default function ButtonExclude({handleDelete}: ButtonProps) {
+    
  const router = useRouter()
+ const [loading, setLoading] = useState<boolean>(false)
 
  async function handleExclude(){
     setLoading(true)
     let status = await handleDelete()
     if(status){
-        router.replace(routeReplace)
-        router.refresh()
+        router.back()
     }
     setLoading(false)
  }
