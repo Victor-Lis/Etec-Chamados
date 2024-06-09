@@ -1,3 +1,4 @@
+"use client"
 import { PersonType } from "@/@types/person";
 import TableRow from "../TableRow";
 

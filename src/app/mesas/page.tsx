@@ -5,12 +5,14 @@ import InternHeader from "@/components/InternHeader";
 import { getDesks } from "../chamados/proximo/utils/db";
 import { useEffect, useState } from "react";
 import { DeskType } from "@/@types/desk";
+import { isAuthorized } from "@/utils/isAuthorized";
 
 export default function Mesas() {
   const [desks, setDesks] = useState<DeskType[]>([]);
 
   useEffect(() => {
     async function fetchData() {
+      await isAuthorized();
       const data = await getDesks();
       if (data.length) setDesks(data);
     }

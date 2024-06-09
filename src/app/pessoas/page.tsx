@@ -1,3 +1,4 @@
+"use client"
 import { PersonType } from "../../@types/person";
 
 import Table from "./components/Table";
@@ -5,12 +6,21 @@ import InternHeader from "@/components/InternHeader";
 
 import { getPeople } from "../mesas/cadastrar/utils/db";
 import { isAuthorized } from "@/utils/isAuthorized";
+import { useEffect, useState } from "react";
 
-export default async function Pessoas() {
+export default function Pessoas() {
+  const [people, setPeople] = useState<PersonType[]>([]);
 
-  await isAuthorized()
-
-  const people: PersonType[] = await getPeople()
+  useEffect(() => {
+    async function fetchData() {
+      await isAuthorized();
+      let data: PersonType[] = await getPeople();
+      if (data) {
+        setPeople(data);
+      }
+    }
+    fetchData()
+  });
 
   return (
     <main className="flex items-center flex-col justify-start min-h-[calc(100vh-80px)]">
@@ -23,4 +33,3 @@ export default async function Pessoas() {
     </main>
   );
 }
- 
