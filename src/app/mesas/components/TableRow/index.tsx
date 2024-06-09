@@ -1,39 +1,11 @@
-"use server";
+"use client";
 import { DeskType } from "@/@types/desk";
 import ButtonEdit from "@/components/ButtonEdit";
 import ButtonExclude from "@/components/ButtonExclude";
-import prisma from "@/lib/prisma";
+import { handleDelete } from "../../utils/db";
 
-export default async function TableRow({ desk }: { desk: DeskType }) {
+export default function TableRow({ desk }: { desk: DeskType }) {
   const formatNum = (n: number) => (n < 10 ? "0" + n : n);
-
-  async function handleDelete() {
-    "use server";
-
-    await prisma.mesas.update({
-      where: {
-        id: desk.id,
-      },
-      data: {
-        Atendente: {
-          disconnect: true,
-        },
-        Chamados: {
-          set: []
-        },
-      },
-    });
-
-    let status = await prisma.mesas
-      .delete({
-        where: {
-          id: desk.id,
-        },
-      })
-      .then(() => true)
-      .catch(() => false);
-    return status;
-  }
 
   return (
     <tr
@@ -46,7 +18,7 @@ export default async function TableRow({ desk }: { desk: DeskType }) {
       </td>
       <td className="font-medium text-left">
         <ButtonEdit path="/mesas/atualizar/" itemId={desk.id} />
-        <ButtonExclude routeReplace="/mesas" handleDelete={handleDelete} />
+        <ButtonExclude handleDelete={() => handleDelete({desk: desk})} />
       </td>
     </tr>
   );

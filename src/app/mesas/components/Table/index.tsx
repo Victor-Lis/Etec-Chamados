@@ -1,3 +1,4 @@
+"use client"
 import { DeskType } from "@/@types/desk";
 import TableRow from "../TableRow";
 

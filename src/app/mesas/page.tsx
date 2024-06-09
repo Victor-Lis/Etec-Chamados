@@ -1,23 +1,21 @@
-import prisma from "@/lib/prisma";
-import { DeskType } from "../../@types/desk";
+"use client";
 
 import Table from "./components/Table";
 import InternHeader from "@/components/InternHeader";
+import { getDesks } from "../chamados/proximo/utils/db";
+import { useEffect, useState } from "react";
+import { DeskType } from "@/@types/desk";
 
-export default async function Mesas() {
+export default function Mesas() {
+  const [desks, setDesks] = useState<DeskType[]>([]);
 
-  async function getDesks(){
-    let data = await prisma.mesas.findMany({
-      include: {
-        Atendente: true
-      }
-    })
-    .then(res => res as DeskType[])
-    .catch(e => console.log(e)) 
-    return !!data ? data : []
-  }
-
-  const desks = await getDesks()
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getDesks();
+      if (data.length) setDesks(data);
+    }
+    fetchData()
+  }, []);
 
   return (
     <main className="flex items-center flex-col justify-start min-h-[calc(100vh-80px)]">
@@ -30,4 +28,3 @@ export default async function Mesas() {
     </main>
   );
 }
- 

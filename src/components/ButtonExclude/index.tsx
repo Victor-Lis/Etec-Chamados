@@ -1,4 +1,5 @@
 "use client"
+import { DeskType } from "@/@types/desk";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
