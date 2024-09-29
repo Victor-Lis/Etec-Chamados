@@ -33,7 +33,7 @@ export default function Form({ticket}:{ticket: TicketType}) {
   }
 
   return (
-    <div className="bg-white shadow-lg p-3 rounded mt-14">
+    <div className="bg-slate-300 shadow-lg p-3 rounded mt-14">
       <form
         className="flex flex-col justify-center items-center"
         onSubmit={(e) => handleSubmit(e)}

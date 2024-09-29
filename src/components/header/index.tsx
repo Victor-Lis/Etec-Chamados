@@ -19,7 +19,7 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full flex items-center px-2 py-4 bg-white h-20 shadow-sm">
+    <header className="w-full flex items-center px-2 py-4 bg-slate-300 h-20 shadow-sm">
       <div className="w-full flex items-center justify-between max-w-7x1 mx-auto">
         <Link 
           href={"https://www.etecatibaia.com.br/"}
@@ -40,13 +40,13 @@ export default function Header() {
         </Link>
 
         {status === "loading" && (
-          <button className="animate-spin">
+          <button type="button" className="animate-spin">
             <FiLoader size={26} color="#09090b" />
           </button>
         )}
 
         {status === "unauthenticated" && (
-          <button onClick={handleLogin}>
+          <button type="button" onClick={handleLogin}>
             <FiLock size={26} color="#09090b" />
           </button>
         )}
@@ -57,7 +57,7 @@ export default function Header() {
               <BiArchiveIn size={24} color="#09090b" />
             </Link>
 
-            <button className="hover:scale-110 duration-300 cursor-pointer" onClick={handleLogout}>
+            <button type="button" className="hover:scale-110 duration-300 cursor-pointer" onClick={handleLogout}>
               <FiLogOut size={24} color="#ff3a13" />
             </button>
           </div>

@@ -1,12 +1,12 @@
 "use client"
-import { PersonType } from "@/@types/person";
+import type { PersonType } from "@/@types/person";
 import TableRow from "../TableRow";
 
 export default function Table({people}:{people: PersonType[]}) {
   return (
-    <table className="w-10/12 min-w-80 mx-auto my-5">
+    <table className="w-10/12 min-w-80 mx-auto my-5 bg-slate-300">
       <thead>
-        <tr className="p-y-2 bg-slate-200 text-blue-600">
+        <tr className="p-y-2 text-blue-600">
           <th className="font-medium text-left pl-1">Nome</th>
           <th className="font-medium text-left hidden sm:flex">Email</th>
           <th className="font-medium text-left">#</th>
