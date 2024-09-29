@@ -17,15 +17,17 @@ export default function ButtonExclude({handleDelete}: ButtonProps) {
 
  async function handleExclude(){
     setLoading(true)
-    let status = await handleDelete()
+    const status = await handleDelete()
     if(status){
-        router.back()
+        // console.log(process.env.NEXT_PUBLIC_HOST_URL)
+        router.replace(`${process.env.NEXT_PUBLIC_HOST_URL as string}/navegacao`)
+        router.refresh()
     }
     setLoading(false)
  }
 
  return (
-    <button className="mr-3" onClick={handleExclude}>
+    <button type="button" className="mr-3" onClick={handleExclude}>
         {loading ? <Loading size={24}/> : <FiTrash2 size={24} color="#ff000f" className="hover:scale-110 duration-300 cursor-pointer"/>}
     </button>
  );

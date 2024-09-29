@@ -17,16 +17,17 @@ export default function ButtonEndTime({routeReplace, id}: ButtonEndTimeProps) {
 
  async function handleEndTime(){
     setLoading(true)
-    let status = await endTime({id})
+    const status = await endTime({id})
     if(status){
-        router.replace(routeReplace)
+        // console.log(process.env.NEXT_PUBLIC_HOST_URL)
+        router.replace(`${process.env.NEXT_PUBLIC_HOST_URL as string}/navegacao`)
         router.refresh()
     }
     setLoading(false)
  }
 
  return (
-    <button className="mr-3" onClick={handleEndTime}>
+    <button type="button" className="mr-3" onClick={handleEndTime}>
         {loading ? <Loading size={24}/> : <FiCheck size={24} color="#16a34a" className="hover:scale-110 duration-300 cursor-pointer"/>}
     </button>
  );

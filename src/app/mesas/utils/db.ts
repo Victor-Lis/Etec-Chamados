@@ -1,11 +1,11 @@
 "use server";
 
-import { DeskType } from "@/@types/desk";
+import type { DeskType } from "@/@types/desk";
 import prisma from "@/lib/prisma";
 
 export async function getDesks() {
   "use server";
-  let data = await prisma.mesas
+  const data = await prisma.mesas
     .findMany({
       include: {
         Atendente: true,
@@ -13,7 +13,7 @@ export async function getDesks() {
     })
     .then((res) => res as DeskType[])
     .catch((e) => console.log(e));
-  return !!data ? data : [];
+  return data ? data : [];
 }
 
 export async function handleDelete({desk}:{desk: DeskType}) {
@@ -33,7 +33,7 @@ export async function handleDelete({desk}:{desk: DeskType}) {
     },
   });
 
-  let status = await prisma.mesas
+  const status = await prisma.mesas
     .delete({
       where: {
         id: desk.id,

@@ -1,11 +1,11 @@
 "use client";
-import { DeskType } from "@/@types/desk";
+import type { DeskType } from "@/@types/desk";
 import ButtonEdit from "@/components/ButtonEdit";
 import ButtonExclude from "@/components/ButtonExclude";
 import { handleDelete } from "../../utils/db";
 
 export default function TableRow({ desk }: { desk: DeskType }) {
-  const formatNum = (n: number) => (n < 10 ? "0" + n : n);
+  const formatNum = (n: number) => (n < 10 ? `0${n}` : n);
 
   return (
     <tr
