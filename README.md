@@ -10,4 +10,4 @@ Sistema criado para agilizar os processos da secretaria da Etec Prof. Carmine Bi
 </div>
 
 ## Autores
-- [@Victor-Lis](https://github.com/Victor-Lis)
+- [@Victor-Lis](https://www.linkedin.com/in/victor-lis-bronzo/)
