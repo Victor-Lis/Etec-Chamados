@@ -22,7 +22,7 @@ export default function TableRow({ticket}: {ticket: TicketType}) {
   return (
     <tr
       key={ticket.id}
-      className={`border-b-2 border-b-slate-200 h-16 last:border-b-0 ${ticket.atendido ? "bg-gray-300/75" : "bg-gray-300"}`}
+      className={`border-b-2 border-b-slate-200 h-16 last:border-b-0 ${ticket.atendido ? "bg-white/75" : "bg-white"}`}
     >
       <td className={`font-medium text-left pl-1 ${ticket.preferencial && "text-red-600"}`}>{formatNum(ticket.id)}</td>
       <td className="font-medium text-left">{ticket.Mesa?.mesa}</td>

@@ -19,7 +19,7 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full flex items-center px-2 py-4 bg-slate-300 h-20 shadow-sm">
+    <header className="w-full flex items-center px-2 py-4 bg-white h-20 shadow-sm">
       <div className="w-full flex items-center justify-between max-w-7x1 mx-auto">
         <Link 
           href={"https://www.etecatibaia.com.br/"}
