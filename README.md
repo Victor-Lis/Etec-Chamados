@@ -1,5 +1,4 @@
-# Etec Chamados with NextJS
-
+# Etec Chamados
 Sistema de gerenciamento de chamados desenvolvido para otimizar os processos da secretaria da Etec Professor Carmine Biagio Tundisi.
 
 ## 📋 Sobre o Projeto
